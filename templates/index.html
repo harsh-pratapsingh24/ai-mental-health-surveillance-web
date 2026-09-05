@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AegisMind — Your Quiet Sanctuary for Mental Well-Being</title>
+    <meta name="description" content="A warm, private space for gentle emotional check-ins, reflective journaling, ambient soundscapes, and caring human support.">
+    
+    <!-- Warm Editorial & Modern Human Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/static/css/mobile.css">
+</head>
+<body>
+    <!-- Full-Screen Sanctuary Workspace -->
+    <div class="dashboard-canvas">
+        
+        <div class="master-dashboard-card">
+            
+            <!-- Left Dark Vertical Dock Sidebar -->
+            <aside class="dock-sidebar" aria-label="Main Navigation">
+                <div class="dock-top">
+                    <!-- Brand Icon -->
+                    <button class="dock-brand-btn" id="dockBrandBtn" title="AegisMind Sanctuary">
+                        <i data-lucide="sparkles" class="dock-brand-icon"></i>
+                    </button>
+
+                    <div class="dock-nav-group">
+                        <button class="dock-nav-btn active" data-target="view-home" title="Sanctuary Overview">
+                            <i data-lucide="home" class="dock-icon"></i>
+                            <span class="dock-tooltip">Overview</span>
+                        </button>
+                        <button class="dock-nav-btn" data-target="view-checkin" title="Daily Check-In">
+                            <i data-lucide="pen-tool" class="dock-icon"></i>
+                            <span class="dock-tooltip">Check-In</span>
+                        </button>
+                        <button class="dock-nav-btn" data-target="view-trajectory" title="Emotional Rhythm">
+                            <i data-lucide="trending-up" class="dock-icon"></i>
+                            <span class="dock-tooltip">Rhythm</span>
+                        </button>
+                        <button class="dock-nav-btn" data-target="view-community" title="Community Circle">
+                            <i data-lucide="users" class="dock-icon"></i>
+                            <span class="dock-tooltip">Circle</span>
+                        </button>
+                        <button class="dock-nav-btn" data-target="view-counselor" title="Caring Counselor Desk">
+                            <i data-lucide="heart-handshake" class="dock-icon"></i>
+                            <span class="dock-tooltip">Care Desk</span>
+                            <span class="dock-live-dot"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dock-bottom">
+                    <!-- Ambient Soothing Soundscape Button -->
+                    <button id="btnDockAmbient" class="dock-action-btn" title="Toggle Calming Ambient Sound">
+                        <i data-lucide="volume-2" id="dockSoundIcon" class="dock-icon"></i>
+                    </button>
+
+                    <!-- Bilingual Language Toggle -->
+                    <button id="langToggleBtn" class="dock-action-btn" title="Switch Language (English / हिन्दी)">
+                        <span id="currentLangLabel" class="lang-text">HI</span>
+                    </button>
+
+                    <!-- Theme Toggle -->
+                    <button id="themeToggleBtn" class="dock-action-btn" title="Toggle Light / Dark Sanctuary">
+                        <i data-lucide="sun" id="themeIconSun" class="dock-icon"></i>
+                        <i data-lucide="moon" id="themeIconMoon" class="dock-icon hidden"></i>
+                    </button>
+
+                    <!-- Urgent Support Button -->
+                    <button id="btnDockSos" class="dock-sos-btn" title="I need someone to talk to right now">
+                        <i data-lucide="phone-call" class="dock-icon"></i>
+                        <span class="sos-ripple"></span>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Workspace Area -->
+            <div class="dashboard-main-area">
+                
+                <!-- Master Top Navigation Bar -->
+                <header class="master-topbar">
+                    <!-- Left: Search & Filter -->
+                    <div class="topbar-search-wrap">
+                        <i data-lucide="search" class="search-icon"></i>
+                        <input type="text" class="topbar-search-input" placeholder="Search thoughts, breathing exercises, notes..." data-i18n-placeholder="searchPlaceholder">
+                    </div>
+
+                    <!-- Center: Navigation Tabs -->
+                    <nav class="topbar-center-nav">
+                        <button class="topbar-tab active" data-target="view-home" data-i18n="navHome">Overview</button>
+                        <button class="topbar-tab" data-target="view-checkin" data-i18n="navCheckin">Daily Check-In</button>
+                        <button class="topbar-tab" data-target="view-trajectory" data-i18n="navTrajectory">Emotional Rhythm</button>
+                        <button class="topbar-tab" data-target="view-community" data-i18n="navCommunity">Community Circle</button>
+                        <button class="topbar-tab" data-target="view-counselor" data-i18n="navCounselor">Care Desk</button>
+                    </nav>
+
+                    <!-- Right: Ambient Audio & Crisis Help -->
+                    <div class="topbar-right-meta">
+                        <!-- Ambient Soundscape Mini Player -->
+                        <div class="soundscape-pill" id="topbarSoundPill" title="Calming Soundscapes">
+                            <i data-lucide="cloud-rain" class="icon-xs text-purple" id="soundscapeIcon"></i>
+                            <span class="sound-name" id="soundscapeName">Rain</span>
+                            <button class="sound-toggle-btn" id="btnToggleAudio" aria-label="Play or pause calming sound">
+                                <i data-lucide="play" class="icon-xs" id="soundPlayPauseIcon"></i>
+                            </button>
+                        </div>
+
+                        <!-- Private Space Badge -->
+                        <div class="user-greeting-pill">
+                            <span class="user-status-dot"></span>
+                            <span data-i18n="privateSpace">100% Private & Safe</span>
+                        </div>
+
+                        <!-- Crisis Helpline Button -->
+                        <button id="btnHeaderSos" class="header-sos-pill">
+                            <i data-lucide="heart" class="icon-xs text-red"></i>
+                            <span data-i18n="needHelpNow">Need to Talk?</span>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Scrollable Viewport Area -->
+                <main class="views-scroll-container" id="mainContainer">
+
+                    <!-- ========================================== -->
+                    <!-- VIEW 1: OVERVIEW / SANCTUARY               -->
+                    <!-- ========================================== -->
+                    <section class="dashboard-view active" id="view-home">
+                        
+                        <!-- Warm Human Greeting Header -->
+                        <div class="dashboard-hero-row">
+                            <div class="hero-left-title">
+                                <div class="hero-brand-badge">
+                                    <i data-lucide="sparkles" class="icon-md text-purple"></i>
+                                </div>
+                                <div class="hero-title-wrap">
+                                    <h1 class="hero-main-title">
+                                        <span id="dynamicGreeting">Good evening, friend</span>
+                                    </h1>
+                                    <p class="hero-sub-text" data-i18n="greetingSub">A quiet, judgment-free space to untangle your thoughts and care for your mind.</p>
+                                </div>
+                            </div>
+
+                            <div class="hero-right-meta">
+                                <div class="total-metric-box">
+                                    <span class="metric-big-num" id="homeDpiBig">0.84</span>
+                                    <span class="metric-big-label" data-i18n="dpiScore">CURRENT EMOTIONAL LOAD</span>
+                                </div>
+                                <div class="date-range-pill" id="todayDatePill">
+                                    <i data-lucide="calendar" class="icon-xs text-muted"></i>
+                                    <span id="currentDateDisplay">Today</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Top Empathetic Status Notice -->
+                        <div class="warm-notice-card" id="homeNoticeCard">
+                            <div class="notice-icon-box">
+                                <i data-lucide="heart-handshake" class="icon-md text-purple"></i>
+                            </div>
+                            <div class="notice-text-content">
+                                <h4 data-i18n="noticeTitle">You seem to be carrying a lot today</h4>
+                                <p id="homeAdvisory" data-i18n="advisoryCritical">
+                                    Your recent reflections show a sharp increase in emotional weight and fatigue. Remember, you don't have to carry this alone. Gentle breathing exercises and a compassionate listener are right here for you.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 3-Column Tri-Split (Human Sanctuary Dashboard) -->
+                        <div class="dashboard-tri-split">
+                            
+                            <!-- Left: Quick Self-Care & Check-In Launcher -->
+                            <div class="panel-left-sidebar">
+                                <div class="panel-card-inner">
+                                    <div class="panel-header-clean">
+                                        <span class="panel-title-text" data-i18n="quickTriage">Daily Comfort Tools</span>
+                                        <span class="badge-status-pill" data-i18n="readyTag">Always Free</span>
+                                    </div>
+
+                                    <!-- Quick Action Cards -->
+                                    <div class="quick-action-list">
+                                        <div class="patient-card-row interactive" id="btnGoCheckin">
+                                            <div class="avatar-circle avatar-purple">
+                                                <i data-lucide="pen-tool" class="icon-sm text-purple"></i>
+                                            </div>
+                                            <div class="patient-info">
+                                                <div class="p-name" data-i18n="dualCheckinTitle">Daily Check-In</div>
+                                                <div class="p-role" data-i18n="dualCheckinDesc">How is your heart feeling today?</div>
+                                            </div>
+                                            <div class="p-score text-purple">Start &rarr;</div>
+                                        </div>
+
+                                        <div class="patient-card-row interactive" id="btnOpenBreathingQuick">
+                                            <div class="avatar-circle avatar-lavender">
+                                                <i data-lucide="wind" class="icon-sm text-lavender"></i>
+                                            </div>
+                                            <div class="patient-info">
+                                                <div class="p-name" data-i18n="groundingTitle">4-7-8 Breathing Pacer</div>
+                                                <div class="p-role" data-i18n="breathRole">Gently calm your nervous system</div>
+                                            </div>
+                                            <div class="p-score text-lavender">Breathe &rarr;</div>
+                                        </div>
+
+                                        <div class="patient-card-row interactive" id="btnQuickSos">
+                                            <div class="avatar-circle avatar-red">
+                                                <i data-lucide="phone" class="icon-sm text-red"></i>
+                                            </div>
+                                            <div class="patient-info">
+                                                <div class="p-name" data-i18n="sosTitle">Free Helpline (14416)</div>
+                                                <div class="p-role">Talk to a kind, caring person 24/7</div>
+                                            </div>
+                                            <div class="p-score text-red">Call &rarr;</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Gentle Thought of the Day -->
+                                    <div class="grounding-tip-box mt-3">
+                                        <div class="tip-header">
+                                            <i data-lucide="sun" class="icon-xs text-purple"></i>
+                                            <strong data-i18n="vagalStim">A Gentle Reminder:</strong>
+                                        </div>
+                                        <p data-i18n="vagalDesc">Healing isn't a straight line. Having a heavy day doesn't erase any of your progress. Take one slow breath right now.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Center & Right: Twin Cards & Smooth Trend Chart -->
+                            <div class="panel-center-right">
+                                
+                                <div class="twin-cards-row">
+                                    <!-- Purple Tinted Card: Emotional Reflection Highlights -->
+                                    <div class="tinted-card card-purple-tint">
+                                        <div class="tinted-header">
+                                            <span class="tint-title" data-i18n="lingMarkersTitle">Thought Reflections</span>
+                                            <span class="tint-sum font-mono text-purple">18.2% Focused</span>
+                                        </div>
+
+                                        <div class="tint-table">
+                                            <div class="tint-table-head">
+                                                <span>Pattern</span>
+                                                <span>Observation</span>
+                                                <span>Meaning</span>
+                                            </div>
+                                            <div class="tint-table-row">
+                                                <span class="t-name">Inward Focus</span>
+                                                <span class="t-mid text-purple font-mono">18.2%</span>
+                                                <span class="t-stat">Words like "I, me, myself"</span>
+                                            </div>
+                                            <div class="tint-table-row">
+                                                <span class="t-name">Rigid Phrasing</span>
+                                                <span class="t-mid text-amber font-mono">12.0%</span>
+                                                <span class="t-stat">"Always, never, impossible"</span>
+                                            </div>
+                                            <div class="tint-table-row">
+                                                <span class="t-name">Voice Cadence</span>
+                                                <span class="t-mid font-mono">0.65 pace</span>
+                                                <span class="t-stat">Calm / feeling exhausted</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Indigo Tinted Card: Available Care Lines -->
+                                    <div class="tinted-card card-indigo-tint">
+                                        <div class="tinted-header">
+                                            <span class="tint-title" data-i18n="clinicalNotesTitle">Instant Free Helplines</span>
+                                            <span class="tint-sum text-purple">Confidential</span>
+                                        </div>
+
+                                        <div class="tint-table">
+                                            <div class="tint-table-head">
+                                                <span>Helpline</span>
+                                                <span>Number</span>
+                                                <span>Availability</span>
+                                            </div>
+                                            <div class="tint-table-row">
+                                                <span class="t-name">Tele-MANAS (India)</span>
+                                                <span class="t-mid font-mono">14416</span>
+                                                <span class="t-stat text-purple">24/7 Toll-Free</span>
+                                            </div>
+                                            <div class="tint-table-row">
+                                                <span class="t-name">KIRAN Helpline</span>
+                                                <span class="t-mid font-mono">1800-599-0019</span>
+                                                <span class="t-stat text-purple">Multi-lingual</span>
+                                            </div>
+                                            <div class="tint-table-row">
+                                                <span class="t-name">Online Counselor</span>
+                                                <span class="t-mid font-mono">1-on-1 Video</span>
+                                                <span class="t-stat text-purple">Available Now</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Bottom Full-Width Smooth Trend Graph -->
+                                <div class="chart-panel-clean">
+                                    <div class="chart-panel-header">
+                                        <div class="chart-title-left">
+                                            <span class="c-title" data-i18n="rolling7DayTitle">Your Emotional Rhythm Over the Past 7 Days</span>
+                                            <span class="c-sub">A gentle visual of how your energy and state of mind have shifted</span>
+                                        </div>
+                                        <div class="chart-badge-pill" id="homeVelocityTag">+0.45 Rising</div>
+                                    </div>
+
+                                    <div class="chart-svg-box" id="homeSparklineContainer">
+                                        <!-- Injected SVG Chart -->
+                                    </div>
+
+                                    <div class="chart-footer-legend">
+                                        <div class="legend-chip"><span class="legend-dot dot-green"></span> Peaceful / Grounded (&lt;0.40)</div>
+                                        <div class="legend-chip"><span class="legend-dot dot-amber"></span> Moderate Load (0.40 - 0.69)</div>
+                                        <div class="legend-chip"><span class="legend-dot dot-red"></span> Heavy / Deep Overwhelm (≥0.70)</div>
+                                    </div>
+                                </div>
+
+                                <!-- Daily Gratitude & Gentle Notes Sticky Board -->
+                                <div class="gratitude-board-card mt-3">
+                                    <div class="gratitude-header">
+                                        <div class="g-header-left">
+                                            <i data-lucide="sparkle" class="icon-xs text-purple"></i>
+                                            <span class="g-title">Today's Little Note of Kindness</span>
+                                        </div>
+                                        <span class="g-badge">A small win or gratitude</span>
+                                    </div>
+                                    <div class="gratitude-input-row">
+                                        <input type="text" id="gratitudeInput" class="gratitude-input" placeholder="e.g. Drank a warm cup of tea, stepped outside for fresh air...">
+                                        <button class="btn-primary-sm" id="btnPinGratitude">
+                                            <i data-lucide="pin" class="icon-xs"></i>
+                                            <span>Pin Note</span>
+                                        </button>
+                                    </div>
+                                    <div class="gratitude-pins-container" id="gratitudePinsList">
+                                        <div class="gratitude-chip">
+                                            <i data-lucide="heart" class="icon-xs text-purple"></i>
+                                            <span>"Listened to the sound of rain for 5 quiet minutes."</span>
+                                        </div>
+                                        <div class="gratitude-chip">
+                                            <i data-lucide="sun" class="icon-xs text-amber"></i>
+                                            <span>"Remembered to drink water and take a slow breath."</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <!-- ========================================== -->
+                    <!-- VIEW 2: DAILY CHECK-IN                     -->
+                    <!-- ========================================== -->
+                    <section class="dashboard-view" id="view-checkin">
+                        <div class="view-header-row">
+                            <div>
+                                <h2 class="view-h2" data-i18n="checkinHeading">Daily Emotional Check-In</h2>
+                                <p class="view-desc" data-i18n="checkinSub">Take a few quiet moments to check in with how you are feeling inside.</p>
+                            </div>
+                            <div class="zk-tag-pill">
+                                <i data-lucide="shield-check" class="icon-xs text-purple"></i>
+                                <span>100% Private • Only visible to you</span>
+                            </div>
+                        </div>
+
+                        <div class="grid-2-col">
+                            <!-- Left: Mood Sliders & Voice Note -->
+                            <div class="column-card">
+                                
+                                <!-- Step 1: Sliders -->
+                                <div class="subcard-clean mb-3">
+                                    <div class="subcard-header">
+                                        <span class="subcard-title" data-i18n="sliderStepTitle">1. Mood & Energy Balance</span>
+                                        <span class="stat-pill pill-purple">Simple & Gentle</span>
+                                    </div>
+
+                                    <div class="slider-box mt-2">
+                                        <div class="slider-meta-row">
+                                            <span class="slider-label" data-i18n="valenceTitle">How does your mood feel?</span>
+                                            <span class="slider-value-pill" id="valValenceLabel">Neutral (3/5)</span>
+                                        </div>
+                                        <input type="range" min="1" max="5" value="3" class="custom-range" id="inputValence">
+                                        <div class="range-sub-text">
+                                            <span data-i18n="valLow">1: Very Heavy</span>
+                                            <span data-i18n="valMid">3: Balanced</span>
+                                            <span data-i18n="valHigh">5: Peaceful</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="slider-box mt-3">
+                                        <div class="slider-meta-row">
+                                            <span class="slider-label" data-i18n="arousalTitle">How is your internal energy?</span>
+                                            <span class="slider-value-pill pill-lavender" id="valArousalLabel">Moderate (3/5)</span>
+                                        </div>
+                                        <input type="range" min="1" max="5" value="3" class="custom-range range-lavender" id="inputArousal">
+                                        <div class="range-sub-text">
+                                            <span data-i18n="aroLow">1: Exhausted</span>
+                                            <span data-i18n="aroMid">3: Steady</span>
+                                            <span data-i18n="aroHigh">5: Racing / Overstimulated</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Step 3: Voice Recorder -->
+                                <div class="subcard-clean">
+                                    <div class="subcard-header">
+                                        <span class="subcard-title" data-i18n="voiceStepTitle">3. Speak Your Mind (Voice Note)</span>
+                                        <span class="stat-pill pill-indigo" id="voiceStatusPill" data-i18n="micReady">Ready</span>
+                                    </div>
+
+                                    <div class="voice-widget-box" id="voiceRecorderBox">
+                                        <div class="waveform-row" id="waveformContainer">
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                            <div class="w-bar"></div>
+                                        </div>
+
+                                        <div class="voice-timer-row">
+                                            <span class="voice-time-text" id="recordingTimer">00:00</span>
+                                            <span class="voice-metrics-text" id="voiceCadenceMetrics">
+                                                <span id="cadenceScoreText" data-i18n="cadenceScore">Tone Cadence: --</span> • 
+                                                <span id="pitchVarianceText" data-i18n="pitchVar">Rhythm: --</span>
+                                            </span>
+                                        </div>
+
+                                        <div class="voice-btn-row">
+                                            <button class="btn-voice-record" id="btnRecordToggle">
+                                                <i data-lucide="mic" id="recordIconMic" class="icon-sm"></i>
+                                                <i data-lucide="square" id="recordIconStop" class="icon-sm hidden"></i>
+                                                <span id="recordBtnLabel">Record a 30s Note</span>
+                                            </button>
+                                            <button class="btn-clean-ghost hidden" id="btnDiscardVoice" data-i18n="discardVoice">Discard</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Right: Reflective Journal & Live Results -->
+                            <div class="column-card">
+                                
+                                <div class="subcard-clean mb-3">
+                                    <div class="subcard-header">
+                                        <span class="subcard-title" data-i18n="journalStepTitle">2. Private Journal Entry</span>
+                                        <span class="word-counter-tag" id="journalWordCount">0 words</span>
+                                    </div>
+
+                                    <p class="guide-text" data-i18n="journalHelper">
+                                        Write whatever is on your heart right now. No one is grading you, and your reflections remain completely private.
+                                    </p>
+
+                                    <textarea id="journalText" class="dashboard-textarea" rows="5" placeholder="What felt heavy or peaceful today? Express your thoughts freely..." data-i18n-placeholder="journalPlaceholder"></textarea>
+
+                                    <div class="prompts-chip-row">
+                                        <button class="quick-chip" data-prompt="I feel like I am always failing and nothing will ever get better for me.">
+                                            <i data-lucide="quote" class="icon-xs"></i> "Feeling stuck"
+                                        </button>
+                                        <button class="quick-chip" data-prompt="Today I noticed some quiet moments of relief while walking outside and breathing calmly.">
+                                            <i data-lucide="quote" class="icon-xs"></i> "A peaceful moment"
+                                        </button>
+                                    </div>
+
+                                    <button class="btn-primary-action mt-3" id="btnSubmitCheckin">
+                                        <i data-lucide="heart" class="icon-sm"></i>
+                                        <span data-i18n="submitCheckinBtn">Save My Reflection</span>
+                                    </button>
+                                </div>
+
+                                <!-- Reflection Summary Card -->
+                                <div class="subcard-clean result-card-pop hidden" id="checkinResultCard">
+                                    <div class="subcard-header">
+                                        <span class="subcard-title" data-i18n="evalTitle">Reflection Summary</span>
+                                        <span class="stat-pill pill-red" id="resultTierBadge">High Distress</span>
+                                    </div>
+
+                                    <div class="result-tri-grid">
+                                        <div class="res-box">
+                                            <span class="res-num" id="resDpi">0.76</span>
+                                            <span class="res-lbl" data-i18n="dpiScore">Distress Index</span>
+                                        </div>
+                                        <div class="res-box">
+                                            <span class="res-num text-lavender" id="resPronouns">20.0%</span>
+                                            <span class="res-lbl" data-i18n="pronounLabel">Inward Focus</span>
+                                        </div>
+                                        <div class="res-box">
+                                            <span class="res-num text-amber" id="resAbsolutist">13.3%</span>
+                                            <span class="res-lbl" data-i18n="absolutistLabel">Fixed Thinking</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="crisis-banner-box hidden" id="resultCrisisBanner">
+                                        <i data-lucide="heart" class="icon-sm text-red"></i>
+                                        <span data-i18n="crisisRegexHit">We noticed expressions of deep pain. Please let us connect you with a supportive counselor.</span>
+                                    </div>
+
+                                    <div class="rec-note-box">
+                                        <strong data-i18n="clinicalRec">Support Suggestion:</strong>
+                                        <p id="resultRecText">Try doing the 4-7-8 breathing pacer for 3 cycles, and consider speaking with a Tele-MANAS counselor today.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ========================================== -->
+                    <!-- VIEW 3: WEEKLY TRENDS & PATTERNS           -->
+                    <!-- ========================================== -->
+                    <section class="dashboard-view" id="view-trajectory">
+                        <div class="view-header-row">
+                            <div>
+                                <h2 class="view-h2" data-i18n="trajectoryHeading">Weekly Patterns & Emotional Rhythm</h2>
+                                <p class="view-desc" data-i18n="trajectorySub">See how your thoughts, energy, and feelings evolve over time.</p>
+                            </div>
+                            <span class="stat-pill pill-purple" id="trajectoryDeltaBadge">+0.45 Weekly Change</span>
+                        </div>
+
+                        <!-- Full-Width Chart Card -->
+                        <div class="chart-panel-clean mb-4">
+                            <div class="chart-panel-header">
+                                <div class="chart-title-left">
+                                    <span class="c-title" data-i18n="sparklineSlope">Distress Index Curve (7 Days)</span>
+                                    <span class="c-sub">A clear, continuous view of your emotional rhythm</span>
+                                </div>
+                                <div class="meta-pills-row">
+                                    <span class="stat-pill pill-indigo">Average: <strong id="trajBaseline">0.39 DPI</strong></span>
+                                    <span class="stat-pill pill-red">Change: <strong id="trajSlope">+0.45 (Rising)</strong></span>
+                                </div>
+                            </div>
+
+                            <div class="large-svg-wrapper" id="trajectoryFullChart">
+                                <!-- Injected Full SVG -->
+                            </div>
+
+                            <div class="chart-footer-legend">
+                                <div class="legend-chip"><span class="legend-dot dot-green"></span> Peaceful Zone (&lt;0.40)</div>
+                                <div class="legend-chip"><span class="legend-dot dot-amber"></span> Moderate Zone (0.40 - 0.69)</div>
+                                <div class="legend-chip"><span class="legend-dot dot-red"></span> Heavy Zone (≥0.70)</div>
+                            </div>
+                        </div>
+
+                        <!-- 2-Column Insights -->
+                        <div class="grid-2-col">
+                            <div class="subcard-clean">
+                                <div class="subcard-header">
+                                    <span class="subcard-title" data-i18n="lingMarkersTitle">Thought Language Patterns</span>
+                                </div>
+
+                                <div class="biomarker-item">
+                                    <div class="bio-meta">
+                                        <span class="b-name" data-i18n="pronounDensity">Inward Reflection ("I", "me", "my")</span>
+                                        <span class="b-val text-lavender font-mono" id="trajPronounVal">18.2%</span>
+                                    </div>
+                                    <div class="prog-track">
+                                        <div class="prog-bar bg-lavender" id="trajPronounBar" style="width: 72%;"></div>
+                                    </div>
+                                    <span class="b-desc" data-i18n="pronounSub">Higher self-focus often appears when we feel isolated or carrying burdens alone.</span>
+                                </div>
+
+                                <div class="biomarker-item mt-3">
+                                    <div class="bio-meta">
+                                        <span class="b-name" data-i18n="absolutistWords">All-or-Nothing Language ("never", "always")</span>
+                                        <span class="b-val text-amber font-mono" id="trajAbsolutistVal">12.0%</span>
+                                    </div>
+                                    <div class="prog-track">
+                                        <div class="prog-bar bg-amber" id="trajAbsolutistBar" style="width: 48%;"></div>
+                                    </div>
+                                    <span class="b-desc" data-i18n="absolutistSub">Absolutist phrasing can reflect feeling stuck in a rigid state of mind.</span>
+                                </div>
+                            </div>
+
+                            <div class="subcard-clean">
+                                <div class="subcard-header">
+                                    <span class="subcard-title" data-i18n="clinicalNotesTitle">Helpful Guidance</span>
+                                </div>
+                                <div class="clinical-findings-box">
+                                    <div class="finding-row">
+                                        <strong>Noticeable Rise in Tension:</strong>
+                                        <p data-i18n="trajSummaryDesc">Your reflections over the last 48 hours show increased stress. Try scheduling 10 minutes of screen-free downtime today.</p>
+                                    </div>
+                                    <div class="finding-row mt-2">
+                                        <strong>Voice Cadence Insight:</strong>
+                                        <p>Your spoken tone showed slower pacing, which frequently correlates with physical fatigue and emotional exhaustion.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ========================================== -->
+                    <!-- VIEW 4: ANONYMOUS COMMUNITY CIRCLE         -->
+                    <!-- ========================================== -->
+                    <section class="dashboard-view" id="view-community">
+                        <div class="view-header-row">
+                            <div>
+                                <h2 class="view-h2" data-i18n="forumHeading">Anonymous Community Circle</h2>
+                                <p class="view-desc" data-i18n="forumSub">A safe, welcoming circle to share words of encouragement with others.</p>
+                            </div>
+                            
+                            <div class="alias-tag-box">
+                                <i data-lucide="user" class="icon-xs text-purple"></i>
+                                <span class="alias-txt" id="userEphemeralAlias">GentleBreeze_74</span>
+                                <button class="btn-refresh-icon" id="btnRefreshAlias" title="Change my handle">
+                                    <i data-lucide="refresh-cw" class="icon-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Post Creator -->
+                        <div class="subcard-clean mb-3">
+                            <textarea id="communityPostInput" class="dashboard-textarea" rows="3" placeholder="Share words of comfort, a small victory, or what helped you through today..." data-i18n-placeholder="forumPlaceholder"></textarea>
+                            <div class="post-action-bar mt-2">
+                                <span class="moderation-tag"><i data-lucide="heart" class="icon-xs text-purple"></i> <span data-i18n="safetyScanned">Safe & supportive community space</span></span>
+                                <button class="btn-primary-sm" id="btnSubmitPost">
+                                    <i data-lucide="send" class="icon-xs"></i>
+                                    <span data-i18n="postBtn">Post Thought</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Feed Grid -->
+                        <div class="community-grid-2col" id="communityFeedContainer">
+                            <!-- Injected Feed -->
+                        </div>
+                    </section>
+
+                    <!-- ========================================== -->
+                    <!-- VIEW 5: COUNSELOR CARE DESK                -->
+                    <!-- ========================================== -->
+                    <section class="dashboard-view" id="view-counselor">
+                        <div class="view-header-row">
+                            <div>
+                                <h2 class="view-h2" data-i18n="counselorHeading">Talk with a Caring Listener</h2>
+                                <p class="view-desc" data-i18n="counselorSub">Confidential 1-on-1 counselor reviews and instant supportive sessions.</p>
+                            </div>
+                            <div class="live-status-pill">
+                                <span class="pulse-dot-red"></span>
+                                <span>COUNSELOR ON CALL</span>
+                            </div>
+                        </div>
+
+                        <div class="counselor-cases-grid" id="counselorQueueContainer">
+                            <!-- Populated by JS -->
+                        </div>
+                    </section>
+
+                </main>
+
+            </div> <!-- /.dashboard-main-area -->
+        </div> <!-- /.master-dashboard-card -->
+
+    </div> <!-- /.dashboard-canvas -->
+
+    <!-- ============================================== -->
+    <!-- MODALS & DIALOGS                               -->
+    <!-- ============================================== -->
+
+    <!-- 1. INFORMED CONSENT MODAL -->
+    <div class="modal-backdrop" id="consentModal">
+        <div class="modal-dialog">
+            <div class="modal-header-center">
+                <div class="modal-icon-badge bg-purple">
+                    <i data-lucide="shield-check" class="icon-lg text-purple"></i>
+                </div>
+                <h2 data-i18n="consentTitle">Your Privacy & Sanctuary</h2>
+                <p class="modal-subtitle" data-i18n="consentSubtitle">How AegisMind protects your private reflections</p>
+            </div>
+            
+            <div class="modal-body-content">
+                <div class="clause-item">
+                    <strong data-i18n="clause1Title">1. Completely Confidential & Private</strong>
+                    <p data-i18n="clause1Desc">Your reflections and voice notes are processed in secure memory and never tied to your personal identity.</p>
+                </div>
+                <div class="clause-item">
+                    <strong data-i18n="clause2Title">2. Thoughtful Pattern Insights</strong>
+                    <p data-i18n="clause2Desc">We gently observe trends in your journal entries to help you understand your emotional changes over time.</p>
+                </div>
+                <div class="clause-item">
+                    <strong data-i18n="clause3Title">3. Immediate Crisis Support</strong>
+                    <p data-i18n="clause3Desc">If you ever express feeling overwhelmed or in crisis, we will immediately connect you with free national helplines and counselor care.</p>
+                </div>
+            </div>
+
+            <div class="modal-footer-center">
+                <button class="btn-primary-action btn-wide" id="btnAcceptConsent">
+                    <i data-lucide="check" class="icon-sm"></i>
+                    <span data-i18n="consentAccept">Enter Sanctuary</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. CRISIS HELP OVERLAY MODAL -->
+    <div class="modal-backdrop hidden" id="crisisOverlayModal">
+        <div class="modal-dialog crisis-dialog">
+            <div class="modal-header-danger">
+                <div class="crisis-icon-box">
+                    <i data-lucide="heart" class="icon-lg text-red"></i>
+                </div>
+                <div>
+                    <h2 data-i18n="sosOverlayTitle">We are here with you</h2>
+                    <p data-i18n="sosOverlaySubtitle">You are safe. Free, confidential support is available right now.</p>
+                </div>
+                <button class="btn-close-modal" id="btnCloseCrisisModal" aria-label="Close modal">
+                    <i data-lucide="x" class="icon-sm"></i>
+                </button>
+            </div>
+
+            <div class="crisis-twin-grid">
+                <!-- Dialers -->
+                <div class="hotlines-list">
+                    <a href="tel:14416" class="hotline-item">
+                        <div class="h-icon bg-red"><i data-lucide="phone" class="icon-sm"></i></div>
+                        <div class="h-meta">
+                            <div class="h-name">Tele-MANAS (Govt of India)</div>
+                            <div class="h-desc">24/7 Free, Confidential Mental Health Line</div>
+                        </div>
+                        <div class="h-btn">Call 14416</div>
+                    </a>
+
+                    <a href="tel:18005990019" class="hotline-item">
+                        <div class="h-icon bg-red"><i data-lucide="phone-call" class="icon-sm"></i></div>
+                        <div class="h-meta">
+                            <div class="h-name">KIRAN Helpline</div>
+                            <div class="h-desc">Govt of India 24/7 Helpline</div>
+                        </div>
+                        <div class="h-btn">1800-599-0019</div>
+                    </a>
+
+                    <a href="tel:988" class="hotline-item">
+                        <div class="h-icon bg-red"><i data-lucide="phone-forwarded" class="icon-sm"></i></div>
+                        <div class="h-meta">
+                            <div class="h-name">988 Lifeline</div>
+                            <div class="h-desc">24/7 Confidential Crisis Support</div>
+                        </div>
+                        <div class="h-btn">Call 988</div>
+                    </a>
+                </div>
+
+                <!-- 4-7-8 Breathing Pacer -->
+                <div class="breathing-widget-card">
+                    <h4 data-i18n="pacerHeader">4-7-8 Breathing Exercise</h4>
+                    
+                    <div class="pacer-orb-container">
+                        <div class="pacer-halo" id="pacerOuterGlow"></div>
+                        <div class="pacer-circle-orb" id="pacerCircle">
+                            <span class="pacer-phase" id="pacerInstructionText">Breathe In</span>
+                            <span class="pacer-num" id="pacerTimerCount">4</span>
+                        </div>
+                    </div>
+
+                    <div class="pacer-btn-wrap">
+                        <button class="btn-primary-sm" id="btnStartPacer">
+                            <i data-lucide="play" class="icon-xs" id="pacerPlayIcon"></i>
+                            <span id="pacerBtnText" data-i18n="startPacer">Start Pacer</span>
+                        </button>
+                        <span class="pacer-cycles-lbl" id="pacerCycleCount">Cycles: 0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. SEV-1 SAFETY LOCK MODAL -->
+    <div class="modal-backdrop hidden" id="sev1LockModal">
+        <div class="modal-dialog sev1-dialog">
+            <div class="sev1-header">
+                <div class="sev1-bubble">
+                    <i data-lucide="heart" class="icon-xl text-red"></i>
+                </div>
+                <h2 data-i18n="sev1Title">Please take a gentle moment</h2>
+                <p data-i18n="sev1Sub">We noticed high distress in your check-in. Your well-being is what matters most.</p>
+            </div>
+            <div class="sev1-body">
+                <p data-i18n="sev1Desc">
+                    A caring human is ready to listen. Please reach out to one of our free confidential helplines or connect with a counselor right now:
+                </p>
+                <div class="sev1-actions-stack">
+                    <a href="tel:14416" class="btn-danger-pill">
+                        <i data-lucide="phone" class="icon-sm"></i>
+                        <span data-i18n="callTeleManas">Call Tele-MANAS (14416)</span>
+                    </a>
+                    <button class="btn-secondary-pill" id="btnSev1OpenJitsi">
+                        <i data-lucide="video" class="icon-sm"></i>
+                        <span data-i18n="joinLiveCounselor">Speak with a Live Counselor</span>
+                    </button>
+                    <button class="btn-ghost-pill" id="btnSev1Acknowledge">
+                        <span data-i18n="ackSafetyProtocol">I am feeling safe right now • Continue</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. MODERATION REPORT MODAL -->
+    <div class="modal-backdrop hidden" id="reportModal">
+        <div class="modal-dialog">
+            <div class="modal-header-center">
+                <div class="modal-icon-badge bg-amber">
+                    <i data-lucide="flag" class="icon-lg text-amber"></i>
+                </div>
+                <h3 data-i18n="reportModalTitle">Flag for Review</h3>
+                <p class="modal-subtitle" data-i18n="reportModalSub">Help us keep this community kind and safe.</p>
+            </div>
+            <div class="modal-body-content">
+                <div class="radio-options-stack">
+                    <label class="radio-card">
+                        <input type="radio" name="reportReason" value="crisis" checked>
+                        <span data-i18n="reportCrisis">Potential Self-Harm or Crisis</span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="reportReason" value="harassment">
+                        <span data-i18n="reportHarassment">Unkind or Disrespectful Behavior</span>
+                    </label>
+                    <label class="radio-card">
+                        <input type="radio" name="reportReason" value="triggering">
+                        <span data-i18n="reportTriggering">Sensitive or Distressing Content</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer-dual">
+                <button class="btn-clean-ghost" id="btnCancelReport" data-i18n="cancel">Cancel</button>
+                <button class="btn-primary-sm" id="btnConfirmReport" data-i18n="submitReport">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. 1-ON-1 JITSI MEET MODAL -->
+    <div class="modal-backdrop hidden" id="jitsiModal">
+        <div class="modal-dialog jitsi-dialog">
+            <div class="jitsi-header">
+                <div class="jitsi-title">
+                    <i data-lucide="video" class="icon-sm text-purple"></i>
+                    <div>
+                        <h3 id="jitsiModalTitle">Confidential 1-on-1 Session</h3>
+                        <p class="modal-subtitle" id="jitsiModalSubtitle">Private Counselor Video Room</p>
+                    </div>
+                </div>
+                <button class="btn-close-modal" id="btnCloseJitsiModal" aria-label="Close session">
+                    <i data-lucide="x" class="icon-sm"></i>
+                </button>
+            </div>
+            <div class="jitsi-frame-box">
+                <iframe id="jitsiIframe" src="about:blank" allow="camera; microphone; fullscreen; display-capture; autoplay" class="jitsi-frame"></iframe>
+            </div>
+            <div class="jitsi-footer">
+                <button class="btn-danger-pill" id="btnEndConsultation">
+                    <i data-lucide="phone-off" class="icon-sm"></i>
+                    <span data-i18n="endCall">Leave Session</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

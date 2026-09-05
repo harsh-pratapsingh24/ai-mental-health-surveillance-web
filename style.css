@@ -1,0 +1,766 @@
+/* ==========================================================================
+   Aashraya — Safe Mental Health & Recovery Portal Design System
+   User-Centric Website Styling
+   ========================================================================== */
+
+:root {
+  /* Brand Tokens */
+  --primary: #0F6E56;
+  --primary-hover: #0C5946;
+  --primary-light: #E6F4F0;
+  --primary-rgb: 15, 110, 86;
+
+  --secondary: #7F77DD;
+  --secondary-hover: #6E66CD;
+  --secondary-light: #F2F1FD;
+  --secondary-rgb: 127, 119, 221;
+
+  /* Backgrounds & Surfaces (Light Mode) */
+  --bg-app: #FAF9F6;
+  --bg-card: #FFFFFF;
+  --bg-card-subtle: #F6F5F0;
+  --border-color: #EAE8E3;
+  --border-subtle: #F0EEE9;
+
+  /* Typography */
+  --text-primary: #2C2C2A;
+  --text-secondary: #5F5E5A;
+  --text-muted: #8E8D88;
+
+  /* Semantic Risk & Mood Tiers */
+  --risk-low: #639922;
+  --risk-low-bg: #F1F7E8;
+  --risk-low-border: #D5EAB9;
+
+  --risk-medium: #BA7517;
+  --risk-medium-bg: #FEF6E9;
+  --risk-medium-border: #F8DEB3;
+
+  --risk-high: #A32D2D;
+  --risk-high-bg: #FDF0F0;
+  --risk-high-border: #F5C6C6;
+
+  --success: #3B6D11;
+  --error: #791F1F;
+
+  /* Radii & Shadows */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Dark Theme Overrides */
+body.dark-theme {
+  --bg-app: #181816;
+  --bg-card: #222220;
+  --bg-card-subtle: #1C1C1A;
+  --border-color: #343430;
+  --border-subtle: #2C2C28;
+
+  --text-primary: #FAF9F6;
+  --text-secondary: #AAA9A4;
+  --text-muted: #757470;
+
+  --primary-light: rgba(15, 110, 86, 0.22);
+  --secondary-light: rgba(127, 119, 221, 0.22);
+
+  --risk-low-bg: rgba(99, 153, 34, 0.16);
+  --risk-medium-bg: rgba(186, 117, 23, 0.16);
+  --risk-high-bg: rgba(163, 45, 45, 0.22);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', 'Inter', -apple-system, sans-serif;
+  letter-spacing: -0.015em;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Top Navigation Header */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px 32px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #0F6E56, #169B7B);
+  color: #fff;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(15, 110, 86, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.brand-group:hover .brand-logo {
+  transform: scale(1.05);
+}
+
+.brand-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-title {
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+/* User Main Navigation Tabs */
+.user-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 4px;
+}
+
+.user-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-nav-btn:hover {
+  color: var(--text-primary);
+}
+
+.user-nav-btn.active {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(15, 110, 86, 0.25);
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.streak-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--risk-medium-bg);
+  color: var(--risk-medium);
+  border: 1px solid var(--risk-medium-border);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+}
+
+.btn-role-switch {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-role-switch:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.icon-button {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.icon-button:hover {
+  color: var(--text-primary);
+  border-color: var(--primary);
+}
+
+.user-avatar-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 5px;
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+}
+
+.user-avatar-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--secondary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-name-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   Portal Main Panels & Layout
+   ========================================================================== */
+.portal-main-panel {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+  min-height: calc(100vh - 72px);
+}
+
+/* Badges & Cards */
+.badge-pill {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-primary {
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid rgba(15, 110, 86, 0.3);
+}
+
+.badge-lavender {
+  background: var(--secondary-light);
+  color: var(--secondary);
+  border: 1px solid rgba(127, 119, 221, 0.3);
+}
+
+.card-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 11px 22px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 4px 14px rgba(15, 110, 86, 0.25);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-outline:hover {
+  background: var(--primary-light);
+}
+
+.btn-danger-outline {
+  background: transparent;
+  color: var(--risk-high);
+  border: 1px solid var(--risk-high);
+  border-radius: var(--radius-md);
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-danger-outline:hover {
+  background: var(--risk-high-bg);
+}
+
+/* ==========================================================================
+   Home Wellness Dashboard
+   ========================================================================== */
+.user-hero-banner {
+  background: linear-gradient(135deg, rgba(15, 110, 86, 0.1), rgba(127, 119, 221, 0.1));
+  border: 1px solid rgba(15, 110, 86, 0.2);
+  border-radius: var(--radius-xl);
+  padding: 32px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.user-hero-title {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.user-hero-quote {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.checkin-hero-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(15, 110, 86, 0.3);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 28px;
+}
+
+.checkin-icon-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Quick Tools Grid */
+.home-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.tool-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tool-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ==========================================================================
+   Part 3: Deterministic Safe Chat Check-in (Web UI)
+   ========================================================================== */
+.chat-window-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  height: 620px;
+}
+
+.chat-header {
+  padding: 16px 24px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-feed {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-bubble {
+  max-width: 72%;
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  line-height: 1.55;
+  position: relative;
+  animation: bubbleSlide 0.25s ease-out;
+}
+
+@keyframes bubbleSlide {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.chat-bubble.bot {
+  background: var(--secondary-light);
+  color: var(--text-primary);
+  border: 1px solid rgba(127, 119, 221, 0.25);
+  border-top-left-radius: 4px;
+  align-self: flex-start;
+}
+
+.chat-bubble.user {
+  background: var(--primary);
+  color: #fff;
+  border-top-right-radius: 4px;
+  align-self: flex-end;
+  box-shadow: var(--shadow-sm);
+}
+
+.chat-time {
+  display: block;
+  font-size: 10px;
+  text-align: right;
+  margin-top: 6px;
+  opacity: 0.75;
+}
+
+.quick-chips-wrapper {
+  display: flex;
+  gap: 10px;
+  padding: 12px 24px;
+  background: var(--bg-card-subtle);
+  border-top: 1px solid var(--border-color);
+  overflow-x: auto;
+}
+
+.quick-chip-btn {
+  background: var(--bg-card);
+  border: 1px solid rgba(127, 119, 221, 0.35);
+  padding: 7px 16px;
+  border-radius: var(--radius-full);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quick-chip-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.chat-input-row {
+  padding: 14px 24px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-input-row input {
+  flex: 1;
+  background: var(--bg-app);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.chat-input-row input:focus {
+  border-color: var(--primary);
+}
+
+.voice-mic-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--bg-app);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.voice-mic-btn.recording {
+  background: var(--risk-high);
+  color: #fff;
+  border-color: var(--risk-high);
+  animation: pulseDot 1s infinite;
+}
+
+.send-action-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* ==========================================
+   4-7-8 Guided Breathing Visualizer Modal
+   ========================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.modal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  max-width: 460px;
+  width: 100%;
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  position: relative;
+}
+
+.breathing-circle-outer {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  margin: 24px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--primary);
+  background: rgba(15, 110, 86, 0.1);
+  transition: transform 1s ease-in-out, background-color 1s ease-in-out, border-color 1s ease-in-out;
+}
+
+.breathing-circle-outer.inhale {
+  transform: scale(1.28);
+  background: rgba(15, 110, 86, 0.2);
+  border-color: var(--primary);
+}
+
+.breathing-circle-outer.hold {
+  transform: scale(1.28);
+  background: rgba(127, 119, 221, 0.25);
+  border-color: var(--secondary);
+}
+
+.breathing-circle-outer.exhale {
+  transform: scale(0.9);
+  background: rgba(99, 153, 34, 0.15);
+  border-color: var(--risk-low);
+}
+
+.breathing-circle-inner {
+  width: 146px;
+  height: 146px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+}
+
+.breathing-number {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+/* Floating Emergency SOS Button */
+.btn-floating-help {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 60;
+  background: var(--risk-high);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 12px 22px;
+  font-size: 13.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 20px rgba(163, 45, 45, 0.45);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-floating-help:hover {
+  transform: scale(1.06);
+  background: #872121;
+}
+
+/* Toast Notifications */
+.toast-wrapper {
+  position: fixed;
+  top: 80px;
+  right: 28px;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.live-toast {
+  pointer-events: auto;
+  width: 390px;
+  background: var(--bg-card);
+  border: 1px solid var(--risk-high-border);
+  border-left: 5px solid var(--risk-high);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+  animation: slideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInRight {
+  0% { transform: translateX(60px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@media (max-width: 800px) {
+  .user-nav-links { display: none; }
+  .hidden-mobile { display: none !important; }
+}
