@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #2C2C2A;
+    background-color: #FAF9F6;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.015em;
+  }
+}
+
+/* Custom scrollbar for safe, calm aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 110, 86, 0.2);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 110, 86, 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(127, 119, 221, 0.25);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(127, 119, 221, 0.45);
+}
+
+/* Breathing animation pulse */
+@keyframes breathingCircle {
+  0% { transform: scale(1); opacity: 0.8; }
+  35% { transform: scale(1.45); opacity: 1; }
+  65% { transform: scale(1.45); opacity: 0.95; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+.animate-breathing {
+  animation: breathingCircle 19s infinite ease-in-out;
+}
+
+/* Glass effect utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(234, 232, 227, 0.8);
+}
+
+.dark .glass-panel {
+  background: rgba(38, 38, 36, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(58, 58, 54, 0.8);
+}
