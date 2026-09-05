@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aashraya — Safe Mental Health & Recovery Companion</title>
+  <meta name="description" content="A calm, trustworthy, non-clinical mental health support space and daily recovery companion for survivors.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230F6E56'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-theme">
+  <div id="app">
+    <!-- Top Navigation Header -->
+    <header class="top-nav">
+      <div class="nav-container">
+        <!-- Brand Group -->
+        <div class="brand-group" onclick="switchUserTab('home')" style="cursor:pointer;">
+          <div class="brand-logo">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </div>
+          <div>
+            <div class="brand-title-wrap">
+              <span class="brand-title">Aashraya</span>
+              <span id="role-badge" class="badge-pill badge-primary">Survivor Space</span>
+            </div>
+            <p class="brand-subtitle">A Safe, Calm & Private Daily Support Companion</p>
+          </div>
+        </div>
+
+        <!-- Main User Navigation Tabs -->
+        <nav class="user-nav-links" id="user-primary-nav">
+          <button id="nav-btn-home" class="user-nav-btn active" onclick="switchUserTab('home')">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span>Home</span>
+          </button>
+          <button id="nav-btn-checkin" class="user-nav-btn" onclick="switchUserTab('checkin')">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>Daily Check-in</span>
+          </button>
+          <button id="nav-btn-trends" class="user-nav-btn" onclick="switchUserTab('trends')">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            <span>My Journey</span>
+          </button>
+          <button id="nav-btn-care" class="user-nav-btn" onclick="switchUserTab('care')">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Care & Calming</span>
+          </button>
+          <button id="nav-btn-profile" class="user-nav-btn" onclick="switchUserTab('profile')">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Profile & Privacy</span>
+          </button>
+        </nav>
+
+        <!-- Right Side: Portal Mode Switcher, Streak, Theme & User Profile -->
+        <div class="nav-controls">
+          <!-- Streak Indicator -->
+          <div class="streak-pill" id="nav-streak-pill" title="Consecutive daily reflections completed">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#BA7517"><path d="M12 2c.5 3 2.5 5 4 7 2.5 3.5 1.5 8.5-2 11-3.5 2.5-8.5 1.5-11-2-1.5-2.5-1.5-5.5 0-8 1-1.5 2.5-3 3-5 1 2.5 3 3.5 4 3.5.5-1.5 1.5-4 2-6.5z"/></svg>
+            <span id="streak-counter-text">5 Day Streak</span>
+          </div>
+
+          <!-- Role Toggle: Switch to Counselor View for Authorized NGO Workers -->
+          <button id="btn-role-toggle" class="btn-role-switch" onclick="togglePortalRole()" title="Switch view between Survivor User Space and NGO Counselor Triage">
+            <span id="role-toggle-text">Switch to Counselor View &rarr;</span>
+          </button>
+
+          <!-- Theme Toggle -->
+          <button id="btn-theme-toggle" class="icon-button" onclick="toggleTheme()" title="Toggle Warm Light / Charcoal Dark Mode">
+            <svg id="theme-sun-icon" style="display:none" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            <svg id="theme-moon-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+
+          <!-- User Avatar -->
+          <div class="user-avatar-pill" onclick="switchUserTab('profile')" style="cursor:pointer;">
+            <div class="user-avatar-circle">M</div>
+            <span id="nav-user-name" class="user-name-label hidden-mobile">Meera</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Panel -->
+    <main id="portal-content" class="portal-main-panel">
+      <!-- Injected dynamically via JavaScript -->
+    </main>
+
+    <!-- Floating Emergency SOS Button (Omnipresent safety feature) -->
+    <button class="btn-floating-help" onclick="openEmergencyModal()" title="Immediate emergency and crisis helpline support">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <span>I Need Help Now</span>
+    </button>
+
+    <!-- Toast Notification Container -->
+    <div id="live-toast-container" class="toast-wrapper"></div>
+
+    <!-- Modals Layer (4-7-8 Breathing, Emergency Support, Notes) -->
+    <div id="modal-container"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
